@@ -6,19 +6,30 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:52:46 by dnakano           #+#    #+#             */
-/*   Updated: 2020/12/23 18:27:40 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/12/23 19:48:52 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 const fs = require("fs");
 
-const countNewline = async (filename) => {
+const countNewLine = (buf) => {
+    let count = 0;
+    for (let i = 0; i < buf.length; i++) {
+      if (buf[i] === "\n") {
+        count++;
+      }
+    }
+    return count;
+}
+
+const readFileCountNewLine = async (filename) => {
   try {
     const buf = await fs.readFileSync(filename, "utf-8");
-    console.log(buf.match(/\n/g).length);
+    const count = countNewLine(buf);
+    console.log(count);
   } catch (error) {
     console.log(error.message);  
   }
 }
 
-countNewline(process.argv[2]);
+readFileCountNewLine(process.argv[2]);
