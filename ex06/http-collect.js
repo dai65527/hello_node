@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   http-client.js                                     :+:      :+:    :+:   */
+/*   http-collect.js                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/23 18:30:01 by dnakano           #+#    #+#             */
-/*   Updated: 2020/12/23 21:25:38 by dnakano          ###   ########.fr       */
+/*   Created: 2020/12/23 19:51:26 by dnakano           #+#    #+#             */
+/*   Updated: 2020/12/23 21:25:53 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@ try {
     throw new Error('Empty URL');
   http.request(process.argv[2], (res) => {
     res.setEncoding('utf8');
-    res.on('data', (chunk) => {
-      console.log(chunk.toString());
-    });
-    res.on('error', (error) => {
+    let dataString = "";
+    res.on("error", (error) => {
       console.error(`error code: ${error.code}`);
+    })
+    res.on("data", (chunk) => {
+      dataString += chunk.toString();
+    });
+    res.on("end", () => {
+      console.log(dataString.length);
+      console.log(dataString);
     })
   }).on("error", (error) => {
     console.error(`error code: ${error.code}`);
@@ -29,3 +34,4 @@ try {
 } catch (error) {
   console.error(error.message);
 }
+
