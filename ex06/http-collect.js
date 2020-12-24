@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:51:26 by dnakano           #+#    #+#             */
-/*   Updated: 2020/12/23 21:25:53 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/12/24 17:42:39 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,17 @@ try {
     let dataString = "";
     res.on("error", (error) => {
       console.error(`error code: ${error.code}`);
-    })
+    });
     res.on("data", (chunk) => {
       dataString += chunk.toString();
     });
     res.on("end", () => {
       console.log(dataString.length);
       console.log(dataString);
-    })
+    });
   }).on("error", (error) => {
     console.error(`error code: ${error.code}`);
   }).end();
 } catch (error) {
   console.error(error.message);
 }
-
