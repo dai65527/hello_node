@@ -6,26 +6,28 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:30:01 by dnakano           #+#    #+#             */
-/*   Updated: 2020/12/23 21:25:38 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/12/30 09:49:06 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 const http = require("http");
 
 try {
-  if (process.argv[2] === undefined)
-    throw new Error('Empty URL');
-  http.request(process.argv[2], (res) => {
-    res.setEncoding('utf8');
-    res.on('data', (chunk) => {
+  if (process.argv.length < 3) {
+    throw new Error("Error: Empty URL");
+  }
+  const req = http.request(process.argv[2], (res) => {
+    res.on("data", (chunk) => {
       console.log(chunk.toString());
     });
-    res.on('error', (error) => {
-      console.error(`error code: ${error.code}`);
+    res.on("error", (error) => {
+      console.error("Error on response: " + error.code);
     })
-  }).on("error", (error) => {
-    console.error(`error code: ${error.code}`);
-  }).end();
+  });
+  req.on("error", (error) => {
+    console.error("Error on request: " + error.code);
+  });
+  req.end();
 } catch (error) {
   console.error(error.message);
 }
