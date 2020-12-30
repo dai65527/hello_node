@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/30 17:09:38 by dnakano           #+#    #+#             */
-/*   Updated: 2020/12/31 08:04:41 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/12/31 08:07:49 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ const createTimeParseServer = (port) => {
   });
   server.on("error", (err, socket) => {
     socket.end("500");
-  })
-  server.listen(port) {
+  });
+  server.listen(port, () => {
     console.log(`listening on ${port}`);
-  };
+  });
 }
 
 createTimeParseServer(Number.parseInt(process.argv[2], 10));
