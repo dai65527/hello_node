@@ -6,7 +6,7 @@
 /*   By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:30:01 by dnakano           #+#    #+#             */
-/*   Updated: 2020/12/30 09:49:06 by dnakano          ###   ########.fr       */
+/*   Updated: 2020/12/30 15:23:42 by dnakano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ try {
     throw new Error("Error: Empty URL");
   }
   const req = http.request(process.argv[2], (res) => {
+    res.setEncoding("utf-8");
     res.on("data", (chunk) => {
       console.log(chunk.toString());
     });
